@@ -22,7 +22,6 @@ namespace StarChart.Controllers
         [HttpGet("{id:int}", Name = "GetById")]
         public IActionResult GetById(int id)
         {
-
             var celestialObject = _context.CelestialObjects.Find(id);
             if (celestialObject == null)
             {
@@ -30,7 +29,6 @@ namespace StarChart.Controllers
             }
             celestialObject.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == id).ToList();
             return Ok(celestialObject);
-
         }
 
     }
