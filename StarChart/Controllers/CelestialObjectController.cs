@@ -7,7 +7,6 @@ using StarChart.Data;
 
 namespace StarChart.Controllers
 {
-
     [Route("")]
     [ApiController]
     public class CelestialObjectController : ControllerBase
@@ -31,5 +30,16 @@ namespace StarChart.Controllers
             return Ok(celestialObject);
         }
 
+        [HttpGet("{id:int}", Name = "GetById")]
+        public IActionResult GetByName(string name)
+        {
+            var celestialObject = _context.CelestialObjects.SingleOrDefault(c => c.Name == name);
+            if (celestialObject == null)
+            {
+                return NotFound();
+            }
+            celestialObject.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == celestialObject.Id).ToList();
+            return Ok(celestialObject);
+        }
     }
 }
