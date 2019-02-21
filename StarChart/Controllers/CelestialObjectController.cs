@@ -58,10 +58,12 @@ namespace StarChart.Controllers
             {
                 return NotFound();
             }
+
             foreach (var celobject in celestialObjects)
             {
                 celobject.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == celobject.Id).ToList();
             }
+
             return Ok(celestialObjects);
         }
     }
