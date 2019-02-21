@@ -29,7 +29,8 @@ namespace StarChart.Controllers
                 return NotFound();
             }
 
-            celestialObject.Satellites.Add(celestialObject);
+            celestialObject.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == id).ToList();
+
             return Ok(celestialObject);
 
         }
