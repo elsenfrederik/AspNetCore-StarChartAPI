@@ -38,8 +38,13 @@ namespace StarChart.Controllers
             {
                 return NotFound();
             }
-          
-            celestialObjects.ToList().ForEach(c => c.Satellites = _context.CelestialObjects.Where(s => s.OrbitedObjectId == s.Id).ToList());
+
+            foreach (var celobject in celestialObjects)
+            {
+                celobject.Satellites = _context.CelestialObjects.Where(c => c.OrbitedObjectId == celobject.Id).ToList();
+            }
+
+            //celestialObjects.ToList().ForEach(c => c.Satellites = _context.CelestialObjects.Where(s => s.OrbitedObjectId == s.Id).ToList());
 
 
             return Ok(celestialObjects);
