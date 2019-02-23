@@ -56,7 +56,7 @@ namespace StarChart.Controllers
         public IActionResult GetAll()
         {
             var celestialObjects = _context.CelestialObjects.ToList();
-            if (celestialObjects.Any())
+            if (!celestialObjects.Any())
             {
                 return NotFound();
             }
