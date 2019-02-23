@@ -112,5 +112,21 @@ namespace StarChart.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+
+            var celestialObjects = _context.CelestialObjects.Where(c=> c.OrbitedObjectId == id || c.Id == id) ;
+            if (celestialObjects.Any())
+            {
+                return NotFound();
+            }
+            
+            _context.CelestialObjects.RemoveRange(celestialObjects);
+            _context.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
